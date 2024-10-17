@@ -1,94 +1,100 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>BUCC Study Corner Instructor Application Form</title>
-  </head>
-  <body>
-    <h2>BUCC Study Corner Instructor Application Form</h2>
-    <form id="applicationForm">
-      <label for="course">Course:</label>
-      <input type="text" id="course" name="course" required><br><br>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission</title>
+</head>
+<body>
+    <form id="myForm">
+        <label for="courseField">Course:</label>
+        <input type="text" id="courseField" required><br>
 
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required><br><br>
+        <label for="nameField">Name:</label>
+        <input type="text" id="nameField" required><br>
 
-      <label for="id">ID:</label>
-      <input type="text" id="id" name="id" required><br><br>
+        <label for="idField">ID:</label>
+        <input type="text" id="idField" required><br>
 
-      <label for="gsuiteid">G-Suite ID:</label>
-      <input type="email" id="gsuiteid" name="gsuiteid" required><br><br>
+        <label for="gsuiteField">G-Suite ID:</label>
+        <input type="text" id="gsuiteField" required><br>
 
-      <label for="phone">Phone:</label>
-      <input type="text" id="phone" name="phone" required><br><br>
+        <label for="phoneField">Phone:</label>
+        <input type="text" id="phoneField" required><br>
 
-      <label for="bucc_department">BUCC Department:</label>
-      <input type="text" id="bucc_department" name="bucc_department" required><br><br>
+        <label for="departmentField">BUCC Department:</label>
+        <input type="text" id="departmentField" required><br>
 
-      <label for="bucc_designation">BUCC Designation:</label>
-      <input type="text" id="bucc_designation" name="bucc_designation" required><br><br>
+        <label for="designationField">BUCC Designation:</label>
+        <input type="text" id="designationField" required><br>
 
-      <label for="cgpa">Current CGPA:</label>
-      <input type="number" step="0.01" id="cgpa" name="cgpa" required><br><br>
+        <label for="cgpaField">Current CGPA:</label>
+        <input type="number" step="0.01" id="cgpaField" required><br>
 
-      <label for="credits_completed">Credits Completed:</label>
-      <input type="number" id="credits_completed" name="credits_completed" required><br><br>
+        <label for="creditsField">Credits completed:</label>
+        <input type="number" id="creditsField" required><br>
 
-      <label for="courses">Courses Interested in Teaching:</label>
-      <input type="text" id="courses" name="courses" required><br><br>
+        <label for="coursesField">Courses interested in teaching:</label>
+        <input type="text" id="coursesField" required><br>
 
-      <label for="hours">Hours Willing to Contribute Each Week:</label>
-      <input type="number" id="hours" name="hours" required><br><br>
+        <label for="hoursField">Hours willing to contribute each week:</label>
+        <input type="number" id="hoursField" required><br>
 
-      <label for="experience">Prior Teaching Experience:</label>
-      <textarea id="experience" name="experience"></textarea><br><br>
+        <label for="experienceField">Prior teaching experience:</label>
+        <input type="text" id="experienceField" required><br>
 
-      <label for="specific_topic">Specific Topics of Interest:</label>
-      <textarea id="specific_topic" name="specific_topic"></textarea><br><br>
+        <label for="topicField">Specific topics of interest:</label>
+        <input type="text" id="topicField" required><br>
 
-      <label for="cv">Drop Your CV:</label>
-      <input type="file" id="cv" name="cv" required><br><br>
+        <label for="cvField">Drop your CV:</label>
+        <input type="text" id="cvField" required><br>
 
-      <label for="cv2">Drop Your CV (again):</label>
-      <input type="file" id="cv2" name="cv2" required><br><br>
+        <label for="cv2Field">Drop your CV (2nd):</label>
+        <input type="text" id="cv2Field" required><br>
 
-      <button type="button" onclick="submitForm()">Submit</button>
+        <button type="submit">Submit</button>
     </form>
 
     <script>
-      function submitForm() {
-        const formData = {
-          course: document.getElementById('course').value,
-          name: document.getElementById('name').value,
-          id: document.getElementById('id').value,
-          gsuiteid: document.getElementById('gsuiteid').value,
-          phone: document.getElementById('phone').value,
-          bucc_department: document.getElementById('bucc_department').value,
-          bucc_designation: document.getElementById('bucc_designation').value,
-          cgpa: document.getElementById('cgpa').value,
-          credits_completed: document.getElementById('credits_completed').value,
-          courses: document.getElementById('courses').value,
-          hours: document.getElementById('hours').value,
-          experience: document.getElementById('experience').value,
-          specific_topic: document.getElementById('specific_topic').value,
-          cv: document.getElementById('cv').files[0],  // File upload handling
-          cv2: document.getElementById('cv2').files[0]  // File upload handling
-        };
+        document.getElementById('myForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the default form submission
 
-        fetch('https://script.google.com/macros/s/AKfycbzfCStJGh-HiIhWR8P88bfJALKXoK6eCXTCMdth2OWY-hn6y1PwxgxOoJWmIfNvdnTKkw/exec', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        })
-        .then(response => response.text())
-        .then(data => {
-          alert('Form submitted successfully!');
-        })
-        .catch(error => {
-          console.error('Error:', error);
+            // Gather the form data
+            const formData = {
+                course: document.getElementById('courseField').value,
+                name: document.getElementById('nameField').value,
+                id: document.getElementById('idField').value,
+                gsuiteid: document.getElementById('gsuiteField').value,
+                phone: document.getElementById('phoneField').value,
+                bucc_department: document.getElementById('departmentField').value,
+                bucc_designation: document.getElementById('designationField').value,
+                cgpa: document.getElementById('cgpaField').value,
+                credits_completed: document.getElementById('creditsField').value,
+                courses: document.getElementById('coursesField').value,
+                hours: document.getElementById('hoursField').value,
+                experience: document.getElementById('experienceField').value,
+                specific_topic: document.getElementById('topicField').value,
+                cv: document.getElementById('cvField').value,
+                cv2: document.getElementById('cv2Field').value
+            };
+
+            // Send the data to your Google Apps Script Web App
+            fetch('https://script.google.com/macros/s/AKfycbzfCStJGh-HiIhWR8P88bfJALKXoK6eCXTCMdth2OWY-hn6y1PwxgxOoJWmIfNvdnTKkw/exec', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // Send data as JSON
+                },
+                body: JSON.stringify(formData) // Convert formData to JSON
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert('Form submitted successfully!');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to submit the form.');
+            });
         });
-      }
     </script>
-  </body>
+</body>
 </html>
