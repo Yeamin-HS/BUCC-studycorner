@@ -4,62 +4,129 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Submission</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            max-width: 100%;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input[type="text"], input[type="number"], input[type="password"] {
+            width: calc(100% - 10px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #764ba2, #667eea);
+        }
+        .gender {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .gender label {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        .gender input[type="radio"] {
+            margin-right: 5px;
+        }
+    </style>
 </head>
 <body>
     <form id="myForm">
+        <h2>Registration Form</h2>
         <label for="courseField">Course:</label>
-        <input type="text" id="courseField" required><br>
+        <input type="text" id="courseField" required>
 
         <label for="nameField">Name:</label>
-        <input type="text" id="nameField" required><br>
+        <input type="text" id="nameField" required>
 
         <label for="idField">ID:</label>
-        <input type="text" id="idField" required><br>
+        <input type="text" id="idField" required>
 
         <label for="gsuiteField">G-Suite ID:</label>
-        <input type="text" id="gsuiteField" required><br>
+        <input type="text" id="gsuiteField" required>
 
         <label for="phoneField">Phone:</label>
-        <input type="text" id="phoneField" required><br>
+        <input type="text" id="phoneField" required>
 
         <label for="departmentField">BUCC Department:</label>
-        <input type="text" id="departmentField" required><br>
+        <input type="text" id="departmentField" required>
 
         <label for="designationField">BUCC Designation:</label>
-        <input type="text" id="designationField" required><br>
+        <input type="text" id="designationField" required>
 
         <label for="cgpaField">Current CGPA:</label>
-        <input type="number" step="0.01" id="cgpaField" required><br>
+        <input type="number" step="0.01" id="cgpaField" required>
 
         <label for="creditsField">Credits completed:</label>
-        <input type="number" id="creditsField" required><br>
+        <input type="number" id="creditsField" required>
 
         <label for="coursesField">Courses interested in teaching:</label>
-        <input type="text" id="coursesField" required><br>
+        <input type="text" id="coursesField" required>
 
         <label for="hoursField">Hours willing to contribute each week:</label>
-        <input type="number" id="hoursField" required><br>
+        <input type="number" id="hoursField" required>
 
         <label for="experienceField">Prior teaching experience:</label>
-        <input type="text" id="experienceField" required><br>
+        <input type="text" id="experienceField" required>
 
         <label for="topicField">Specific topics of interest:</label>
-        <input type="text" id="topicField" required><br>
+        <input type="text" id="topicField" required>
 
         <label for="cvField">Drop your CV:</label>
-        <input type="text" id="cvField" required><br>
+        <input type="text" id="cvField" required>
 
         <label for="cv2Field">Drop your CV (2nd):</label>
-        <input type="text" id="cv2Field" required><br>
+        <input type="text" id="cv2Field" required>
+
+        <div class="gender">
+            <label><input type="radio" name="gender" value="male" required> Male</label>
+            <label><input type="radio" name="gender" value="female" required> Female</label>
+            <label><input type="radio" name="gender" value="other"> Prefer not to say</label>
+        </div>
 
         <button type="submit">Submit</button>
     </form>
 
     <script>
         document.getElementById('myForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent the default form submission
+            e.preventDefault();
 
-            // Gather the form data
             const formData = {
                 course: document.getElementById('courseField').value,
                 name: document.getElementById('nameField').value,
@@ -78,13 +145,12 @@
                 cv2: document.getElementById('cv2Field').value
             };
 
-            // Send the data to your Google Apps Script Web App
             fetch('https://script.google.com/macros/s/AKfycby9LqoTju6VTRcM_Bi59u3Ht-Sk_QlujHuA6X1aldI8XzUKd3qqT5nipgNTdxbtXdNK4w/exec', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json' // Send data as JSON
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData) // Convert formData to JSON
+                body: JSON.stringify(formData)
             })
             .then(response => response.text())
             .then(data => {
