@@ -6,70 +6,83 @@
     <title>BUCC Study Corner Recruitment</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #a8c0ff, #3f2b96);
-            height: 100vh;
+            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-
         form {
-            background-image: url('https://drive.google.com/file/d/1Bnt6nEA7zYxTUXGW1ELIM4redue6eH3M/view?usp=sharing'); /* Replace with your Drive image ID */
-            background-size: cover;
-            background-position: center;
-            padding: 20px;
+            background-color: white;
+            padding: 30px;
             border-radius: 10px;
-            width: 450px;
-            opacity: 0.9;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            max-width: 100%;
+            overflow-y: auto;
+            max-height: 90vh;
         }
-
         h2 {
             text-align: center;
-            color: white;
             margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        label {
-            color: white;
+            font-size: 22px;
             font-weight: bold;
+            color: #4a4a4a;
+        }
+        label {
+            font-size: 14px;
             margin-bottom: 5px;
             display: block;
+            color: #333;
         }
-
-        input[type="text"],
-        input[type="number"] {
-            width: 100%;
+        input[type="text"], input[type="number"], input[type="password"] {
+            width: calc(100% - 20px); /* Adjust for better field width */
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            box-sizing: border-box;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         }
-
         button {
             width: 100%;
             padding: 10px;
-            background-color: #4CAF50;
+            background: linear-gradient(90deg, #667eea, #764ba2);
             color: white;
             border: none;
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
         }
-
         button:hover {
-            background-color: #45a049;
+            background: linear-gradient(90deg, #764ba2, #667eea);
+        }
+        .gender {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .gender label {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        .gender input[type="radio"] {
+            margin-right: 5px;
+        }
+        /* Allow vertical scrolling for form overflow */
+        form::-webkit-scrollbar {
+            width: 5px;
+        }
+        form::-webkit-scrollbar-thumb {
+            background-color: #764ba2;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
     <form id="myForm">
-        <h2>BUCC Study Corner Recruitment</h2>
+        <h2>BUCC STUDY CORNER RECRUITMENT</h2>
 
         <label for="courseField">Course:</label>
         <input type="text" id="courseField" required>
@@ -116,14 +129,19 @@
         <label for="cv2Field">Drop your CV (2nd):</label>
         <input type="text" id="cv2Field" required>
 
+        <div class="gender">
+            <label><input type="radio" name="gender" value="male" required> Male</label>
+            <label><input type="radio" name="gender" value="female" required> Female</label>
+            <label><input type="radio" name="gender" value="other"> Prefer not to say</label>
+        </div>
+
         <button type="submit">Submit</button>
     </form>
 
     <script>
         document.getElementById('myForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent the default form submission
+            e.preventDefault();
 
-            // Gather the form data
             const formData = {
                 course: document.getElementById('courseField').value,
                 name: document.getElementById('nameField').value,
@@ -142,13 +160,12 @@
                 cv2: document.getElementById('cv2Field').value
             };
 
-            // Send the data to your Google Apps Script Web App
             fetch('https://script.google.com/macros/s/AKfycby9LqoTju6VTRcM_Bi59u3Ht-Sk_QlujHuA6X1aldI8XzUKd3qqT5nipgNTdxbtXdNK4w/exec', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json' // Send data as JSON
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData) // Convert formData to JSON
+                body: JSON.stringify(formData)
             })
             .then(response => response.text())
             .then(data => {
