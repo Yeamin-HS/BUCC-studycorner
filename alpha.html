@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BUCC Study Corner Instructor Application Form</title>
+  </head>
+  <body>
+    <h2>BUCC Study Corner Instructor Application Form</h2>
+    <form id="applicationForm">
+      <label for="course">Course:</label>
+      <input type="text" id="course" name="course" required><br><br>
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required><br><br>
+
+      <label for="id">ID:</label>
+      <input type="text" id="id" name="id" required><br><br>
+
+      <label for="gsuiteid">G-Suite ID:</label>
+      <input type="email" id="gsuiteid" name="gsuiteid" required><br><br>
+
+      <label for="phone">Phone:</label>
+      <input type="text" id="phone" name="phone" required><br><br>
+
+      <label for="bucc_department">BUCC Department:</label>
+      <input type="text" id="bucc_department" name="bucc_department" required><br><br>
+
+      <label for="bucc_designation">BUCC Designation:</label>
+      <input type="text" id="bucc_designation" name="bucc_designation" required><br><br>
+
+      <label for="cgpa">Current CGPA:</label>
+      <input type="number" step="0.01" id="cgpa" name="cgpa" required><br><br>
+
+      <label for="credits_completed">Credits Completed:</label>
+      <input type="number" id="credits_completed" name="credits_completed" required><br><br>
+
+      <label for="courses">Courses Interested in Teaching:</label>
+      <input type="text" id="courses" name="courses" required><br><br>
+
+      <label for="hours">Hours Willing to Contribute Each Week:</label>
+      <input type="number" id="hours" name="hours" required><br><br>
+
+      <label for="experience">Prior Teaching Experience:</label>
+      <textarea id="experience" name="experience"></textarea><br><br>
+
+      <label for="specific_topic">Specific Topics of Interest:</label>
+      <textarea id="specific_topic" name="specific_topic"></textarea><br><br>
+
+      <label for="cv">Drop Your CV:</label>
+      <input type="file" id="cv" name="cv" required><br><br>
+
+      <label for="cv2">Drop Your CV (again):</label>
+      <input type="file" id="cv2" name="cv2" required><br><br>
+
+      <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <script>
+      function submitForm() {
+        const formData = {
+          course: document.getElementById('course').value,
+          name: document.getElementById('name').value,
+          id: document.getElementById('id').value,
+          gsuiteid: document.getElementById('gsuiteid').value,
+          phone: document.getElementById('phone').value,
+          bucc_department: document.getElementById('bucc_department').value,
+          bucc_designation: document.getElementById('bucc_designation').value,
+          cgpa: document.getElementById('cgpa').value,
+          credits_completed: document.getElementById('credits_completed').value,
+          courses: document.getElementById('courses').value,
+          hours: document.getElementById('hours').value,
+          experience: document.getElementById('experience').value,
+          specific_topic: document.getElementById('specific_topic').value,
+          cv: document.getElementById('cv').files[0],  // File upload handling
+          cv2: document.getElementById('cv2').files[0]  // File upload handling
+        };
+
+        fetch('YOUR_GOOGLE_APPS_SCRIPT_URL', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        })
+        .then(response => response.text())
+        .then(data => {
+          alert('Form submitted successfully!');
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      }
+    </script>
+  </body>
+</html>
